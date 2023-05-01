@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;;
 
 public class Common {
+    // Common data and methods for all programs
+    // Eg data for all accounts, products and orders and Scanner variable for input
+    // Methods such as taking input with message, Handling menu using list of options 
+    // Creating table for data
     public static Scanner input = new Scanner(System.in);
     public static HashMap <String, Accounts> all_accounts = new HashMap<String, Accounts>();
     public static HashMap <String, Products> all_products = new HashMap<String, Products>();

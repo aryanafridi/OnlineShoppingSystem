@@ -41,6 +41,9 @@ public class Customer extends Accounts {
     }
 
     private void add_to_cart(String id, int amount) {
+        if (cart.keySet().contains(id)) {
+            amount += cart.get(id);
+        }
         cart.put(id, amount);
         System.out.printf("Product with ID %s and amount %d has been added to cart.\n", id, amount);
     }

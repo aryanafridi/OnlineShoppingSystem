@@ -22,8 +22,12 @@ public class Admin extends Accounts {
         double cost = Common.input_with_prompt("Enter Cost: ", 0.0);
         boolean availability = Common.input_with_prompt("Enter Availabality [true: false]: ", true);
         Products new_product = new Products(name, id, description, price, cost, availability);
-        Common.all_products.put(id, new_product);
-        System.out.printf("%s added successfully in products.\n", name);
+        if (Common.all_products.keySet().contains(id)) {
+            System.out.println("Product with this id already exists.");
+        }else {
+            Common.all_products.put(id, new_product);
+            System.out.printf("%s added successfully in products.\n", name);
+        }
     }
     private void remove_product() {
         String id = Common.input_with_prompt("Enter Product ID to remove: ");
@@ -94,13 +98,17 @@ public class Admin extends Accounts {
             String address = Common.input_with_prompt("Enter Address: ");
             String email = Common.input_with_prompt("Enter Email: ");
             String password = Common.input_with_prompt("Enter Password: ");
-            if (privelege == 2) {
-                String payment_details = Common.input_with_prompt("Enter Payment Details: ");
-                Common.all_accounts.put(email, new Customer(name, address, email, password, payment_details));
+            if (Common.all_accounts.keySet().contains(email)) {
+                System.out.println("Account with this email already exists.");
             }else {
-                Common.all_accounts.put(email, new Admin(name, address, email, password));
+                if (privelege == 2) {
+                    String payment_details = Common.input_with_prompt("Enter Payment Details: ");
+                    Common.all_accounts.put(email, new Customer(name, address, email, password, payment_details));
+                }else {
+                    Common.all_accounts.put(email, new Admin(name, address, email, password));
+                }
+                System.out.printf("Account for %s created successfully!\n", name);
             }
-            System.out.printf("Account for %s created successfully!\n", name);
         }else {
             System.out.println("Wrong number entered!");
         }
